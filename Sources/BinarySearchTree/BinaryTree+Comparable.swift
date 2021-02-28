@@ -1,26 +1,26 @@
 import BinaryTree
 import Tree
 
-public extension BinaryTree where Children == BinaryChildren<Element>, Element: Comparable {
+public extension BinaryTree where Descendent == BinaryChildren<Element>, Element: Comparable {
   init(_ elements: [Element]) {
     var tree: BinaryTree<Element> = .empty
-    elements.forEach{tree.insert($0)}
+    elements.forEach { tree.insert($0) }
     self = tree
   }
-  
+
   mutating func remove(_ i: Element) { self = removing(i) }
-  
+
   func removing(_ i: Element) -> Self {
     switch self {
     case .empty: return self
     case .node(value: i, let children):
       switch (children.left, children.right) {
       case (.empty, .empty): return .empty
-      case  (.node, .node):
+      case (.node, .node):
         guard let inOrderSuccessor = children.right.min,
-          let val = inOrderSuccessor.value,
-          let right = inOrderSuccessor.children?.right else {
-            return children.right
+              let val = inOrderSuccessor.value,
+              let right = inOrderSuccessor.descentent?.right else {
+          return children.right
         }
         return .node(value: val, .init(children.left, right))
       case (_, .empty): return children.left
@@ -32,12 +32,12 @@ public extension BinaryTree where Children == BinaryChildren<Element>, Element: 
       return .node(value: value, .init(children.left, children.right.removing(i)))
     }
   }
-  
+
   mutating func remove(treeUnder i: Element) { self = removing(treeUnder: i) }
-  
+
   func removing(treeUnder i: Element) -> Self {
     switch self {
-    case .empty:  return self
+    case .empty: return self
     case .node(value: i, _): return .empty
     case let .node(value: value, children) where i < value:
       return .node(value: value, .init(children.left.removing(treeUnder: i), children.right))

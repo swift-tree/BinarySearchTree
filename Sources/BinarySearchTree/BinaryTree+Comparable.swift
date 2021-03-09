@@ -19,7 +19,7 @@ public extension BinaryTree where Descendent == BinaryChildren<Element>, Element
       case (.node, .node):
         guard let inOrderSuccessor = children.right.min,
               let val = inOrderSuccessor.value,
-              let right = inOrderSuccessor.descentent?.right else {
+              let right = inOrderSuccessor.descendent?.right else {
           return children.right
         }
         return .node(value: val, .init(children.left, right))

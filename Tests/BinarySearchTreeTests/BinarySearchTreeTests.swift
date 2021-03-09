@@ -39,7 +39,7 @@ final class BinarySearchTreeTests: XCTestCase {
   }
 
   func test_min_right_tree() {
-    XCTAssertEqual(tree.descentent?.right.min, .node(value: 6, .noDescendent))
+    XCTAssertEqual(tree.descendent?.right.min, .node(value: 6, .noDescendent))
   }
 
   func test_remove_root_1_level() {

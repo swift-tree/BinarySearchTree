@@ -6,4 +6,9 @@ public extension BinaryTree where Descendent == BinaryChildren<Element> {
     guard case let .node(value: _, children) = self else { return nil }
     return children.left.min ?? self
   }
+
+  var max: Tree? {
+    guard case let .node(value: _, children) = self else { return nil }
+    return children.right.max ?? self
+  }
 }

@@ -32,6 +32,12 @@ final class BinarySearchTreeTests: XCTestCase {
     XCTAssertEqual(tree.min, tree)
   }
 
+  func test_max_no_right_tree() {
+    let tree = BinarySearchIntegerTree([6, 7, 8, 9, 10].reversed())
+
+    XCTAssertEqual(tree.max, tree)
+  }
+
   func test_min_no_right_tree() {
     let tree = BinarySearchIntegerTree([6, 7, 8, 9, 10].reversed())
 
